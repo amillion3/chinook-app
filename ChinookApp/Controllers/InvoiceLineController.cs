@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ChinookApp.Controllers
 {
-    public class SalesAgents
+    [Route("api/[controller]")]
+    [ApiController]
+    public class InvoiceLineController : Controller
     {
+        
     }
 }
