@@ -24,5 +24,11 @@ namespace ChinookApp.DataAccess
         {
             return _salesagents;
         }
+
+        public IEnumerable<SalesAgentModel> GetSalesAgent(int id)
+        {
+            // what is yield return and why does it work?
+            yield return _salesagents.First(i => i.EmployeeId == id);
+        }
     }
 }
