@@ -9,9 +9,9 @@ namespace ChinookApp.DataAccess
 {
     public class SalesAgentStorage
     {
-        static List<SalesAgent> _salesAgent = new List<SalesAgent>()
+        static List<SalesAgentModel> _salesagents = new List<SalesAgentModel>()
         {
-            new SalesAgent
+            new SalesAgentModel
             {
                 EmployeeId = 123456,
                 FirstName = "Steve-O",
@@ -19,5 +19,16 @@ namespace ChinookApp.DataAccess
                 Title = "Sales Support Agent"
             }
         };
+
+        public IEnumerable<SalesAgentModel> GetAllSalesAgents()
+        {
+            return _salesagents;
+        }
+
+        public IEnumerable<SalesAgentModel> GetSalesAgent(int id)
+        {
+            // what is yield return and why does it work?
+            yield return _salesagents.First(i => i.EmployeeId == id);
+        }
     }
 }

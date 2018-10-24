@@ -9,9 +9,9 @@ namespace ChinookApp.DataAccess
 {
     public class InvoiceLineStorage
     {
-        static List<InvoiceLine> _invoiceLine = new List<InvoiceLine>()
+        static List<InvoiceLineModel> _invoiceLine = new List<InvoiceLineModel>()
         {
-            new InvoiceLine
+            new InvoiceLineModel
             {
                 InvoiceLineId = 555,
                 CustomerId = 1234,

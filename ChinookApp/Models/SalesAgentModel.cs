@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ChinookApp.Models
 {
-    public class SalesAgent
+    public class SalesAgentModel
     {
         public int EmployeeId { get; set; }
         public string FirstName { get; set; }
