@@ -35,8 +35,7 @@ namespace ChinookApp.Controllers
         public ActionResult<List<SalesAgentModel>> GetSalesAgent(int id)
         {
             var storage = _salesagents.GetAllSalesAgents();
-            // var agent = storage.Where(s => s.EmployeeId == id);
-            var agent = storage.Where(storag => storag.EmployeeId == id);
+            var agent = storage.Where(s => s.EmployeeId == id);
 
             return Ok(agent);
         }

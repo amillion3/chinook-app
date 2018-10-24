@@ -30,5 +30,21 @@ namespace ChinookApp.DataAccess
             // what is yield return and why does it work?
             yield return _salesagents.First(i => i.EmployeeId == id);
         }
+
+        private const string ConnectionString = "Server=(local);Database=Chinook;Trusted_Connection=True;";
+
+        //public bool AddSalesAgent(SalesAgentModel salesAgent)
+        //{
+        //    using (var db = new SqlConnection(ConnectionString))
+        //    {
+        //        db.Open();
+        //        var command = db.CreateCommand();
+        //        //command.CommandText = @"INSERT INTO [dbo].[SalesAgents]
+        //        //    ([Name],[Color],[MaxFeetPerSecond],[Size],[Sex])
+        //        //    VALUES (@Name,@Color,@MaxFeet,@Size,@Sex)";
+        //        //command.Parameters.AddWithValue("@name", rabbit.Name);
+
+        //    }
+        //}
     }
 }

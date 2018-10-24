@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,13 +24,39 @@ namespace ChinookApp.DataAccess
             }
         };
 
-        private const string ConnectionString = "Server=(local);Database=hihihihi;Trusted_Connection=True;";
+        private const string ConnectionString = "Server=(local);Database=Chinook;Trusted_Connection=True;";
 
-        public bool addNewInvoice(InvoiceModel invoice)
+        public InvoiceModel GetInvoice(int id)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                return true;
+                db.Open();
+                var command = db.CreateCommand();
+                command.CommandText = @"select *
+                                    from Invoice
+                                    where InvoiceId = @id";
+                
+                // below, sticks parameter of `id` into sql statement
+                command.Parameters.AddWithValue("@id", id);
+
+                // .ExecuteReader() gets/reads data from database 
+                var result = command.ExecuteReader();
+
+                if (result.Read())
+                {
+                    InvoiceModel invoiceResponse = new InvoiceModel
+                    {
+                        InvoiceId = (int)result["InvoiceId"],
+                        CustomerId = (int)result["CustomerId"],
+                        BillingAddress = result["BillingAddress"].ToString(),
+                        BillingCity = result["BillingCity"].ToString(),
+                        BillingState = result["BillingState"].ToString(),
+                        BillingCountry = result["BillingCountry"].ToString(),
+                        BillingPostalCode = result["BillingPostalCode"].ToString(),
+                    };
+                    return invoiceResponse;
+                }
+                return null;
             }
         }
     }
