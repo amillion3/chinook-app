@@ -9,9 +9,9 @@ namespace ChinookApp.DataAccess
 {
     public class InvoiceStorage
     {
-        static List<Invoice> _invoice = new List<Invoice>()
+        static List<InvoiceModel> _invoice = new List<InvoiceModel>()
         {
-            new Invoice
+            new InvoiceModel
             {
                 InvoiceId = 123,
                 CustomerId = 1234,
@@ -25,11 +25,11 @@ namespace ChinookApp.DataAccess
 
         private const string ConnectionString = "Server=(local);Database=hihihihi;Trusted_Connection=True;";
 
-        public bool addNewInvoice(Invoice invoice)
+        public bool addNewInvoice(InvoiceModel invoice)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                return Ok();
+                return true;
             }
         }
     }

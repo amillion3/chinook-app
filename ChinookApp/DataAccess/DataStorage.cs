@@ -10,14 +10,14 @@ namespace ChinookApp.DataAccess
 {
     public class DataStorage
     {
-        static List <Invoice> _invoice = new List<Invoice>();
+        static List <InvoiceModel> _invoice = new List<InvoiceModel>();
         private const string ConnectionString = "Server=(local);Database=hihihihi;Trusted_Connection=True;";
         
-        public bool addInvoice(Invoice invoice)
+        public bool addInvoice(InvoiceModel invoice)
         {
             using (var db = new SqlConnection(ConnectionString)) 
             {
-                return Ok();
+                return true;
             }
         }
     }

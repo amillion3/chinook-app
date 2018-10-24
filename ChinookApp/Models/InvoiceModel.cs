@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ChinookApp.Models
 {
-    public class Invoice
+    public class InvoiceModel
     {
         public int InvoiceId { get; set; }
         public int CustomerId { get; set; }
