@@ -21,11 +21,11 @@ namespace ChinookApp.Controllers
         }
         // end storage ***
 
-        // Get Single Invoice ***
+        // Get Invoice(s) by a Single Agent ***
         [HttpGet("{id}")]
-        public IActionResult GetInvoice(int id)
+        public IActionResult GetInvoiceByAgent(int id)
         {
-             return Ok(_invoice.GetInvoice(id));
+             return Ok(_invoice.GetInvoiceByAgent(id));
         }
     }
 }

@@ -10,31 +10,24 @@ namespace ChinookApp.DataAccess
 {
     public class InvoiceStorage
     {
-        static List<InvoiceModel> _invoice = new List<InvoiceModel>()
-        {
-            new InvoiceModel
-            {
-                InvoiceId = 123,
-                CustomerId = 1234,
-                BillingAddress = "12345 Main St, Smith City, TN 37127",
-                BillingCity = "Smith City",
-                BillingState = "TN",
-                BillingCountry = "USA",
-                BillingPostalCode = "37127"
-            }
-        };
-
         private const string ConnectionString = "Server=(local);Database=Chinook;Trusted_Connection=True;";
 
-        public InvoiceModel GetInvoice(int id)
+        public InvoiceModel GetInvoiceByAgent(int id)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
                 db.Open();
                 var command = db.CreateCommand();
-                command.CommandText = @"select *
-                                    from Invoice
-                                    where InvoiceId = @id";
+                // do i need the customer in here???
+                command.CommandText =
+                    @"select
+                    EmployeeFullName = Employee.FirstName + ' ' + Employee.LastName,
+	                CustomerFullName = Customer.FirstName + ' ' + Customer.LastName,
+	                Invoice.InvoiceId
+                    from Employee
+                        join Customer on Employee.EmployeeId = Customer.SupportRepId
+                            join Invoice on Customer.SupportRepId = Invoice.CustomerId
+                    where Employee.EmployeeId = @id";
                 
                 // below, sticks parameter of `id` into sql statement
                 command.Parameters.AddWithValue("@id", id);
