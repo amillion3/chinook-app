@@ -11,13 +11,13 @@ namespace ChinookApp.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class InvoiceController : Controller
+    public class GetInvoiceByAgentController : Controller
     {
         // storage ***
-        private readonly InvoiceStorage _invoice;
-        public InvoiceController()
+        private readonly GetInvoiceByAgentStorage _invoice;
+        public GetInvoiceByAgentController()
         {
-            _invoice = new InvoiceStorage();
+            _invoice = new GetInvoiceByAgentStorage();
         }
         // end storage ***
 

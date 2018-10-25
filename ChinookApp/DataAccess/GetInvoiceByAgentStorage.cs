@@ -8,22 +8,20 @@ using ChinookApp.Models;
 
 namespace ChinookApp.DataAccess
 {
-    public class InvoiceStorage
+    public class GetInvoiceByAgentStorage
     {
         private const string ConnectionString = "Server=(local);Database=Chinook;Trusted_Connection=True;";
 
-        public InvoiceModel GetInvoiceByAgent(int id)
+        // Provide an endpoint that shows the invoices associated with each sales agent. 
+        // The result should include the Sales Agent's full name.
+        public GetInvoiceByAgentModel GetInvoiceByAgent(int id)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
                 db.Open();
                 var command = db.CreateCommand();
-                // do i need the customer in here???
                 command.CommandText =
-                    @"select
-                    EmployeeFullName = Employee.FirstName + ' ' + Employee.LastName,
-	                CustomerFullName = Customer.FirstName + ' ' + Customer.LastName,
-	                Invoice.InvoiceId
+                    @"select *
                     from Employee
                         join Customer on Employee.EmployeeId = Customer.SupportRepId
                             join Invoice on Customer.SupportRepId = Invoice.CustomerId
@@ -37,8 +35,9 @@ namespace ChinookApp.DataAccess
 
                 if (result.Read())
                 {
-                    InvoiceModel invoiceResponse = new InvoiceModel
+                    GetInvoiceByAgentModel invoiceResponse = new GetInvoiceByAgentModel
                     {
+                        CustomerName = result["FirstName"].ToString() + " " + result["LastName"].ToString(),
                         InvoiceId = (int)result["InvoiceId"],
                         CustomerId = (int)result["CustomerId"],
                         BillingAddress = result["BillingAddress"].ToString(),
@@ -46,6 +45,7 @@ namespace ChinookApp.DataAccess
                         BillingState = result["BillingState"].ToString(),
                         BillingCountry = result["BillingCountry"].ToString(),
                         BillingPostalCode = result["BillingPostalCode"].ToString(),
+                        Total = (decimal)result["Total"]
                     };
                     return invoiceResponse;
                 }
