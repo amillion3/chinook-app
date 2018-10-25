@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 
 namespace ChinookApp.Models
 {
-    public class InvoiceModel
+    // Provide an endpoint that shows the invoices associated with each sales agent. 
+    // The result should include the Sales Agent's full name.
+    public class GetInvoiceByAgentModel
     {
+        public string CustomerName { get; set; }
         public int InvoiceId { get; set; }
         public int CustomerId { get; set; }
         public string BillingAddress { get; set; }
@@ -14,5 +17,6 @@ namespace ChinookApp.Models
         public string BillingState { get; set; }
         public string BillingCountry { get; set; }
         public string BillingPostalCode { get; set; }
+        public decimal Total { get; set; }
     }
 }
