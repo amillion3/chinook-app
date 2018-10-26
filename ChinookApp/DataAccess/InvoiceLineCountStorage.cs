@@ -15,15 +15,33 @@ namespace ChinookApp.DataAccess
         //  of line items for an Invoice with a parameterized Id from user input.
         // HINT, this could use `ExecuteScalar`
 
-    public InvoiceLineCountModel InvoiceLineCount(int id)
-    {
-        using (var db = new SqlConnection(ConnectionString))
+        public InvoiceLineCountModel InvoiceLineCount(int id)
         {
-            db.Open();
-            var command = db.CreateCommand();
-            command.CommandText = @"";
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                db.Open();
+                var command = db.CreateCommand();
+                command.CommandText = @"select count(*) as c
+                                            from InvoiceLine
+                                            where InvoiceId = @id";
 
-            var result = command.ExecuteScalar();
+                command.Parameters.AddWithValue("@id", id);
+
+                // why won't you work!
+                // int result = (Int32) command.ExecuteScalar();
+
+                var result = command.ExecuteReader();
+
+                if (result.Read())
+                {
+                    InvoiceLineCountModel countResponse = new InvoiceLineCountModel
+                    {
+                        LineItemCount = (Int32)result["c"]
+                    };
+                    return countResponse;
+                }
+                return null;
+            }
         }
     }
 }
