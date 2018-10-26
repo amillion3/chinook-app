@@ -27,20 +27,11 @@ namespace ChinookApp.DataAccess
 
                 command.Parameters.AddWithValue("@id", id);
 
-                // why won't you work!
-                // int result = (Int32) command.ExecuteScalar();
-
-                var result = command.ExecuteReader();
-
-                if (result.Read())
+                InvoiceLineCountModel countResponse = new InvoiceLineCountModel
                 {
-                    InvoiceLineCountModel countResponse = new InvoiceLineCountModel
-                    {
-                        LineItemCount = (Int32)result["c"]
-                    };
-                    return countResponse;
-                }
-                return null;
+                    LineItemCount = (Int32)command.ExecuteScalar()
+                };
+                return countResponse;
             }
         }
     }
