@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "7892b946-8f48-47f5-9a30-202f9e594ab5",
+		"name": "Chinook-App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. GetInvoiceByAgent()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:52819/api/GetInvoiceByAgent/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52819",
+					"path": [
+						"api",
+						"GetInvoiceByAgent",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. GetAllInvoices()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:52819/api/GetAllInvoices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52819",
+					"path": [
+						"api",
+						"GetAllInvoices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. InvoiceLineCount()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:52819/api/invoicelinecount/37",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52819",
+					"path": [
+						"api",
+						"invoicelinecount",
+						"37"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. InsertInvoice()",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:52819/api/insertinvoice/?id=3&date=01/01/2001&address=1234 main st&city=nashvegas&state=tn&country=usa&zip=12345&total=123.45",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52819",
+					"path": [
+						"api",
+						"insertinvoice",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "3"
+						},
+						{
+							"key": "date",
+							"value": "01/01/2001"
+						},
+						{
+							"key": "address",
+							"value": "1234 main st"
+						},
+						{
+							"key": "city",
+							"value": "nashvegas"
+						},
+						{
+							"key": "state",
+							"value": "tn"
+						},
+						{
+							"key": "country",
+							"value": "usa"
+						},
+						{
+							"key": "zip",
+							"value": "12345"
+						},
+						{
+							"key": "total",
+							"value": "123.45"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. UpdateEmployee",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:52819/api/updateemployee/3/?first=joe&last=smho",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52819",
+					"path": [
+						"api",
+						"updateemployee",
+						"3",
+						""
+					],
+					"query": [
+						{
+							"key": "first",
+							"value": "joe"
+						},
+						{
+							"key": "last",
+							"value": "smho"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

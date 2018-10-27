@@ -9,5 +9,8 @@ namespace ChinookApp.Models
     //  parameter for Employee Id and new name
     public class UpdateEmployeeModel
     {
+        public int EmployeeId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

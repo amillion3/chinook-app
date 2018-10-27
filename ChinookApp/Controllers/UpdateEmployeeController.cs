@@ -20,9 +20,9 @@ namespace ChinookApp.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateEmployee()
+        public IActionResult UpdateEmployee(int id, string first, string last)
         {
-            return Ok(_update.UpdateEmployee());
+            return Ok(_update.UpdateEmployee(id, first, last));
         }
 
     }
