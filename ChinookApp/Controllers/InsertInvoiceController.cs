@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using ChinookApp.DataAccess;
 
 
@@ -15,9 +16,9 @@ namespace ChinookApp.Controllers
     public class InsertInvoiceController : ControllerBase
     {
         private readonly InsertInvoiceStorage _newInvoice;
-        public InsertInvoiceController()
+        public InsertInvoiceController(IConfiguration config)
         {
-            _newInvoice = new InsertInvoiceStorage();
+            _newInvoice = new InsertInvoiceStorage(config);
         }
         [HttpPost]
         public IActionResult InsertInvoice(int id, DateTime date, string address, string city, string state, string country, string zip, decimal total)
