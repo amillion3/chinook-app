@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using ChinookApp.DataAccess;
+using ChinookApp.Models;
 
 namespace ChinookApp.Controllers
 {
@@ -13,9 +15,9 @@ namespace ChinookApp.Controllers
     public class GetAllInvoicesController : ControllerBase
     {
         private readonly GetAllInvoicesStorage _invoices;
-        public GetAllInvoicesController()
+        public GetAllInvoicesController(IConfiguration config)
         {
-            _invoices = new GetAllInvoicesStorage();
+            _invoices = new GetAllInvoicesStorage(config);
         }
 
         // Get All Invoices

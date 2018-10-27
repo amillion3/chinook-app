@@ -5,12 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using ChinookApp.Models;
 using System.Collections;
+using Dapper;
+using Microsoft.Extensions.Configuration;
 
 namespace ChinookApp.DataAccess
 {
     public class GetAllInvoicesStorage
     {
-        private const string ConnectionString = "Server=(local);Database=Chinook;Trusted_Connection=True;";
+        private readonly string ConnectionString;
+
+        public GetAllInvoicesStorage(IConfiguration config)
+        {
+            ConnectionString = config.GetSection("ConnectionString").Value;
+        }
 
         // Provide an endpoint that shows the Invoice Total, Customer name, 
         //  Country and Sale Agent name for all invoices.
@@ -19,28 +26,14 @@ namespace ChinookApp.DataAccess
             using (var db = new SqlConnection(ConnectionString))
             {
                 db.Open();
-                var command = db.CreateCommand();
-                command.CommandText = @"select *, Customer.FirstName as CustomerFirstName, Customer.LastName as CustomerLastName, Employee.FirstName as EmployeeFirstName, Employee.LastName as EmployeeLastName
+
+                var result = db.Query<GetAllInvoicesModel>(
+                    @"select *, (Customer.FirstName + ' ' + Customer.LastName) as CustomerName, (Employee.FirstName + ' ' + Employee.LastName) as AgentName
                     from Employee
 	                    join Customer on Employee.EmployeeId = Customer.SupportRepId
-		                    join Invoice on Customer.CustomerId = Invoice.CustomerId";
-
-                var result = command.ExecuteReader();
-
-                List<GetAllInvoicesModel> InvoiceResponse = new List<GetAllInvoicesModel>();
-
-                while (result.Read())
-                {
-                    GetAllInvoicesModel invoicesResponse = new GetAllInvoicesModel
-                    {
-                        InvoiceTotal = (decimal)result["Total"],
-                        CustomerName = result["CustomerFirstName"].ToString() + " " + result["CustomerLastName"].ToString(),
-                        Country = result["BillingCountry"].ToString(),
-                        AgentName = result["EmployeeFirstName"].ToString() + " " + result["EmployeeLastName"].ToString()
-                    };
-                    InvoiceResponse.Add(invoicesResponse);
-                }
-            return InvoiceResponse;
+		                    join Invoice on Customer.CustomerId = Invoice.CustomerId"
+                );
+                return result.ToList();
             }
         }
     }
