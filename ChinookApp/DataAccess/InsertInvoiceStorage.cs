@@ -14,7 +14,6 @@ namespace ChinookApp.DataAccess
         // Provide a new endpoint to INSERT a new invoice with 
         //  parameters for customerid and billing address
 
-        //public InsertInvoiceModel InsertInvoice(int id, string address, string city, string state, string country, string zip)
         public bool InsertInvoice(int id, DateTime date, string address, string city, string state, string country, string zip, decimal total)
         {
             using (var db = new SqlConnection(ConnectionString))
